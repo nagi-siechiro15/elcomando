@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "eydvzegvfbh/1.0.0": {
+        "runtime": {
+          "eydvzegvfbh.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "eydvzegvfbh/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
