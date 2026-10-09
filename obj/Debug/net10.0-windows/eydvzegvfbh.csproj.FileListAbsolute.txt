@@ -15,3 +15,4 @@ C:\Users\ayoub\source\repos\eydvzegvfbh\eydvzegvfbh\obj\Debug\net10.0-windows\ey
 C:\Users\ayoub\source\repos\eydvzegvfbh\eydvzegvfbh\obj\Debug\net10.0-windows\eydvzegvfbh.genruntimeconfig.cache
 C:\Users\ayoub\source\repos\eydvzegvfbh\eydvzegvfbh\obj\Debug\net10.0-windows\ref\eydvzegvfbh.dll
 C:\Users\ayoub\source\repos\eydvzegvfbh\eydvzegvfbh\obj\Debug\net10.0-windows\eydvzegv.39B84557.Up2Date
+C:\Users\ayoub\source\repos\eydvzegvfbh\eydvzegvfbh\obj\Debug\net10.0-windows\eydvzegvfbh.sourcelink.json

@@ -80,7 +80,39 @@ namespace eydvzegvfbh
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (comboBox1.SelectedItem == null)
+            { 
+            MessageBox.Show("Veuillez sélectionner un produit à supprimer.");
+            return;
+        }
+            else
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (row.Cells[0].Value != null && row.Cells[0].Value.ToString() == comboBox1.SelectedItem.ToString())
+                    {
+                          textBox1.Text = row.Cells[1].Value.ToString();
+                        textBox2.Text = row.Cells[2].Value.ToString();
+                        numericUpDown1.Value = Convert.ToDecimal(row.Cells[3].Value);
+                        richTextBox1.Text = row.Cells[4].Value.ToString();
 
+                    }
+                }
+            }
+
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Cells[0].Value != null && row.Cells[0].Value.ToString() == comboBox1.SelectedItem.ToString())
+                {
+                    textBox1.Text = row.Cells[1].Value.ToString();
+                    textBox2.Text = row.Cells[2].Value.ToString();
+                    numericUpDown1.Value = Convert.ToDecimal(row.Cells[3].Value);
+                    richTextBox1.Text = row.Cells[4].Value.ToString();
+
+                }
+
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
