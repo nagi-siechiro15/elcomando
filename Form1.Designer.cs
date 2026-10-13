@@ -150,6 +150,7 @@
             button2.TabIndex = 11;
             button2.Text = "Modifier";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
@@ -159,6 +160,7 @@
             button3.TabIndex = 12;
             button3.Text = "Supprimer";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button4
             // 
@@ -200,6 +202,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.InactiveCaption;
             ClientSize = new Size(907, 450);
             Controls.Add(comboBox1);
             Controls.Add(label6);
