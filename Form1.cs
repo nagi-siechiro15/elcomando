@@ -14,7 +14,23 @@ namespace eydvzegvfbh
             dataGridView1.Columns.Add("prix", "prix");
             dataGridView1.Columns.Add("quantite", "quantite");
             dataGridView1.Columns.Add("description", "description");
-
+            if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\produits.txt"))
+            {
+                return;
+            }
+            else
+            {
+                string[] lignes = File.ReadAllLines(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\produits.txt");
+                foreach (string ligne in lignes)
+                {
+                    string[] valeurs = ligne.Split(';');
+                    if (valeurs.Length == 5)
+                    {
+                        dataGridView1.Rows.Add(valeurs);
+                        comboBox1.Items.Add(valeurs[0]);
+                    }
+                }
+            }
 
         }
 
