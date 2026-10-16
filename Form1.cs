@@ -182,17 +182,186 @@ namespace eydvzegvfbh
                 if (row.Cells[0].Value != null && row.Cells[0].Value.ToString() == comboBox1.SelectedItem.ToString())
                 {
                     dataGridView1.Rows.Remove(row);
+
                     comboBox1.Items.Remove(comboBox1.SelectedItem);
                     clearinput();
+
+                    if (dataGridView1.Rows.Count == 1)
+                    {
+                        comboBox1.Items.Clear();
+                        comboBox1.Text = "";
+                    }
                     break;
                 }
 
             }
 
-            if (dataGridView1.Rows.Count == 0)
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+
+
+            if (dataGridView1.Rows.Count == 0 || dataGridView1.Rows[0].IsNewRow)
+                return;
+
+            DataGridViewRow row = dataGridView1.Rows[0];
+
+            dataGridView1.ClearSelection();
+            dataGridView1.CurrentCell = row.Cells[0];
+            row.Selected = true;
+            dataGridView1.FirstDisplayedScrollingRowIndex = row.Index;
+
+            textBox1.Text = Convert.ToString(row.Cells[1].Value);
+            textBox2.Text = Convert.ToString(row.Cells[2].Value);
+            richTextBox1.Text = Convert.ToString(row.Cells[4].Value);
+
+            if (decimal.TryParse(Convert.ToString(row.Cells[3].Value), out decimal valeur))
             {
-                comboBox1.Items.Clear();
+                numericUpDown1.Value = Math.Min(
+                    Math.Max(valeur, numericUpDown1.Minimum),
+                    numericUpDown1.Maximum);
+            }
+
+
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+            int lastRowIndex = dataGridView1.Rows.Count
+        - (dataGridView1.AllowUserToAddRows ? 2 : 1);
+
+            if (lastRowIndex < 0)
+                return; // Aucune ligne contenant des données
+
+            DataGridViewRow row = dataGridView1.Rows[lastRowIndex];
+
+            dataGridView1.CurrentCell = row.Cells[0];
+            row.Selected = true;
+            dataGridView1.FirstDisplayedScrollingRowIndex = row.Index;
+
+            textBox1.Text = Convert.ToString(row.Cells[1].Value);
+            textBox2.Text = Convert.ToString(row.Cells[2].Value);
+            richTextBox1.Text = Convert.ToString(row.Cells[4].Value);
+
+            if (decimal.TryParse(Convert.ToString(row.Cells[3].Value), out decimal valeur))
+            {
+                numericUpDown1.Value = Math.Min(
+                    Math.Max(valeur, numericUpDown1.Minimum),
+                    numericUpDown1.Maximum);
             }
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            int indexActuel = dataGridView1.CurrentCell?.RowIndex ?? -1;
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (indexActuel >= 0 && row.Index == indexActuel + 1)
+                {
+                    dataGridView1.CurrentCell = row.Cells[0];
+                    row.Selected = true;
+                    dataGridView1.FirstDisplayedScrollingRowIndex = row.Index;
+                    textBox1.Text = Convert.ToString(row.Cells[1].Value);
+                    textBox2.Text = Convert.ToString(row.Cells[2].Value);
+                    richTextBox1.Text = Convert.ToString(row.Cells[4].Value);
+                    if (decimal.TryParse(Convert.ToString(row.Cells[3].Value), out decimal valeur))
+                    {
+                        numericUpDown1.Value = Math.Min(
+                            Math.Max(valeur, numericUpDown1.Minimum),
+                            numericUpDown1.Maximum);
+                    }
+                    break;
+                }
+
+            }
+
+
+
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                int indexActuel = dataGridView1.CurrentCell?.RowIndex ?? -1;
+                if (indexActuel > 0 && row.Index == indexActuel - 1)
+                {
+                    dataGridView1.CurrentCell = row.Cells[0];
+                    row.Selected = true;
+                    dataGridView1.FirstDisplayedScrollingRowIndex = row.Index;
+                    textBox1.Text = Convert.ToString(row.Cells[1].Value);
+                    textBox2.Text = Convert.ToString(row.Cells[2].Value);
+                    richTextBox1.Text = Convert.ToString(row.Cells[4].Value);
+                    if (decimal.TryParse(Convert.ToString(row.Cells[3].Value), out decimal valeur))
+                    {
+                        numericUpDown1.Value = Math.Min(
+                            Math.Max(valeur, numericUpDown1.Minimum),
+                            numericUpDown1.Maximum);
+                    }
+                    break;
+                }
+
+            }
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            string chemin = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+                 + "\\produits.txt";
+
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(chemin))
+                {
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    {
+                        if (row.IsNewRow)
+                        {
+                            continue;
+                        }
+
+                        string[] valeur = new string[dataGridView1.Columns.Count];
+
+                        for (int i = 0; i < dataGridView1.Columns.Count; i++)
+                        {
+                            valeur[i] = row.Cells[i].Value?.ToString() ?? string.Empty;
+                        }
+
+                        writer.WriteLine(string.Join(";", valeur));
+                    }
+                }
+
+                MessageBox.Show(
+                    "Les données ont été exportées avec succès vers le fichier produits.txt sur le bureau.",
+                    "Exportation réussie",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Une erreur s'est produite lors de l'exportation : {ex.Message}",
+                    "Erreur",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+
     }
 }
