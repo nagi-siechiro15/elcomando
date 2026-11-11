@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "R6THIz3z8wg=",
+  "dgSpecHash": "TqH1AqJBEn8=",
   "success": true,
   "projectFilePath": "C:\\Users\\ayoub\\source\\repos\\eydvzegvfbh\\eydvzegvfbh\\eydvzegvfbh.csproj",
   "expectedPackageFiles": [
@@ -31,11 +31,11 @@
     {
       "code": "NU1510",
       "level": "Warning",
-      "message": "Le PackageReference Microsoft.Win32.SystemEvents ne sera pas supprimé. Ce package est disponible automatiquement et n’a pas besoin d’être référencé explicitement. Supprimez l’élément PackageReference.",
+      "message": "Le PackageReference System.Data.Common ne sera pas supprimé. Ce package est disponible automatiquement et n’a pas besoin d’être référencé explicitement. Supprimez l’élément PackageReference.",
       "projectPath": "C:\\Users\\ayoub\\source\\repos\\eydvzegvfbh\\eydvzegvfbh\\eydvzegvfbh.csproj",
       "warningLevel": 1,
       "filePath": "C:\\Users\\ayoub\\source\\repos\\eydvzegvfbh\\eydvzegvfbh\\eydvzegvfbh.csproj",
-      "libraryId": "Microsoft.Win32.SystemEvents",
+      "libraryId": "System.Data.Common",
       "targetGraphs": [
         "net10.0-windows7.0"
       ]
@@ -43,11 +43,11 @@
     {
       "code": "NU1510",
       "level": "Warning",
-      "message": "Le PackageReference System.Data.Common ne sera pas supprimé. Ce package est disponible automatiquement et n’a pas besoin d’être référencé explicitement. Supprimez l’élément PackageReference.",
+      "message": "Le PackageReference Microsoft.Win32.SystemEvents ne sera pas supprimé. Ce package est disponible automatiquement et n’a pas besoin d’être référencé explicitement. Supprimez l’élément PackageReference.",
       "projectPath": "C:\\Users\\ayoub\\source\\repos\\eydvzegvfbh\\eydvzegvfbh\\eydvzegvfbh.csproj",
       "warningLevel": 1,
       "filePath": "C:\\Users\\ayoub\\source\\repos\\eydvzegvfbh\\eydvzegvfbh\\eydvzegvfbh.csproj",
-      "libraryId": "System.Data.Common",
+      "libraryId": "Microsoft.Win32.SystemEvents",
       "targetGraphs": [
         "net10.0-windows7.0"
       ]

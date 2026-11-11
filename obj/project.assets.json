@@ -1209,7 +1209,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.402/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.403/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -1508,8 +1508,8 @@
       "code": "NU1510",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Le PackageReference Microsoft.Win32.SystemEvents ne sera pas supprimé. Ce package est disponible automatiquement et n’a pas besoin d’être référencé explicitement. Supprimez l’élément PackageReference.",
-      "libraryId": "Microsoft.Win32.SystemEvents",
+      "message": "Le PackageReference System.Data.Common ne sera pas supprimé. Ce package est disponible automatiquement et n’a pas besoin d’être référencé explicitement. Supprimez l’élément PackageReference.",
+      "libraryId": "System.Data.Common",
       "targetGraphs": [
         "net10.0-windows7.0"
       ]
@@ -1518,8 +1518,8 @@
       "code": "NU1510",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Le PackageReference System.Data.Common ne sera pas supprimé. Ce package est disponible automatiquement et n’a pas besoin d’être référencé explicitement. Supprimez l’élément PackageReference.",
-      "libraryId": "System.Data.Common",
+      "message": "Le PackageReference Microsoft.Win32.SystemEvents ne sera pas supprimé. Ce package est disponible automatiquement et n’a pas besoin d’être référencé explicitement. Supprimez l’élément PackageReference.",
+      "libraryId": "Microsoft.Win32.SystemEvents",
       "targetGraphs": [
         "net10.0-windows7.0"
       ]

@@ -108,6 +108,7 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(151, 28);
             comboBox1.TabIndex = 39;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // label6
             // 
@@ -134,6 +135,7 @@
             button4.TabIndex = 36;
             button4.Text = "Rechercher";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // button3
             // 
@@ -143,6 +145,7 @@
             button3.TabIndex = 35;
             button3.Text = "Supprimer";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button2
             // 
@@ -152,6 +155,7 @@
             button2.TabIndex = 34;
             button2.Text = "Modifier";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button1
             // 
