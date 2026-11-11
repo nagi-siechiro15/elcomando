@@ -326,13 +326,21 @@ namespace eydvzegvfbh
 
         private void button3_Click(object sender, EventArgs e)
         {
-            SqlConnection cnx = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand("DELETE FROM products WHERE id_product = @id_product", cnx);
-            cmd.Parameters.AddWithValue("@id_product", comboBox1.SelectedValue);
-            cnx.Open();
-            cmd.ExecuteNonQuery();
-            cnx.Close();
-            refresh();
+            try
+            {
+                SqlConnection cnx = new SqlConnection(connectionString);
+                SqlCommand cmd = new SqlCommand("DELETE FROM products WHERE id_product = @id_product", cnx);
+                cmd.Parameters.AddWithValue("@id_product", comboBox1.SelectedValue);
+                cnx.Open();
+                cmd.ExecuteNonQuery();
+                cnx.Close();
+                refresh();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Erreur : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
-}
+}               
+
