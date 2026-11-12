@@ -6,12 +6,16 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace eydvzegvfbh
 {
     public partial class Form2 : Form
     {
         string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=gestionprouduit;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=True;Application Name=\"SQL Server Management Studio\";Command Timeout=0";
+        private bool _isRefreshing;
+        private bool _isSyncingComboBox2;
+
         public Form2()
         {
             InitializeComponent();
@@ -25,6 +29,26 @@ namespace eydvzegvfbh
         }
 
         private void refresh()
+        {
+            bool wasRefreshing = _isRefreshing;
+            _isRefreshing = true;
+
+            try
+            {
+                refreshCore();
+            }
+            finally
+            {
+                _isRefreshing = wasRefreshing;
+            }
+
+            if (!wasRefreshing)
+            {
+                comboBox1_SelectedIndexChanged(comboBox1, EventArgs.Empty);
+            }
+        }
+
+        private void refreshCore()
         {
             // methode 2
             DataTable datatable = new DataTable();
@@ -41,7 +65,8 @@ namespace eydvzegvfbh
             comboBox1.DisplayMember = "id_product";
             comboBox1.ValueMember = "id_product";
             comboBox1.DataSource = datatable;
-            comboBox1.SelectedIndex = -1;
+            comboBox1.SelectedIndex = 0;
+
 
             if (dataGridView1.Columns["id_category"] != null)
             {
@@ -204,7 +229,7 @@ namespace eydvzegvfbh
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox2.SelectedIndex == -1 || comboBox2.SelectedValue == null)
+            if (_isSyncingComboBox2 || comboBox2.SelectedIndex == -1 || comboBox2.SelectedValue == null)
             {
                 return;
             }
@@ -276,23 +301,39 @@ namespace eydvzegvfbh
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex == -1 || comboBox1.SelectedValue == null)
-                return;
+            if (_isRefreshing || comboBox1.SelectedValue == null) return;
 
-            string idProduit = comboBox1.SelectedValue.ToString();
-            if (comboBox1.SelectedItem is DataRowView drv)
+            int productId = Convert.ToInt32(comboBox1.SelectedValue);
+
+            dataGridView1.ClearSelection();
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                textBox1.Text = drv["name_product"]?.ToString();
-                textBox2.Text = drv["prix"]?.ToString();
+                if (row.IsNewRow) continue;
 
-                if (drv["quantity"] != DBNull.Value)
-                    numericUpDown1.Value = Convert.ToDecimal(drv["quantity"]);
-
-                richTextBox1.Text = drv["descriptions"]?.ToString();
-
-                if (drv["id_category"] != DBNull.Value)
+                if (row.Cells["id_product"].Value != null &&
+                    Convert.ToInt32(row.Cells["id_product"].Value) == productId)
                 {
-                    comboBox2.SelectedValue = drv["id_category"];
+                    textBox1.Text = row.Cells["name_product"].Value.ToString();
+                    textBox2.Text = row.Cells["prix"].Value.ToString();
+                    numericUpDown1.Value = Convert.ToDecimal(row.Cells["quantity"].Value);
+                    richTextBox1.Text = row.Cells["descriptions"].Value.ToString();
+
+                    bool wasSyncingComboBox2 = _isSyncingComboBox2;
+                    _isSyncingComboBox2 = true;
+                    try
+                    {
+                        comboBox2.SelectedValue = row.Cells["id_category"].Value;
+                    }
+                    finally
+                    {
+                        _isSyncingComboBox2 = wasSyncingComboBox2;
+                    }
+
+                    dataGridView1.CurrentCell = row.Cells[0]; // Sélectionner la première cellule de la ligne
+                    row.Selected = true;
+
+                    break;
                 }
             }
 
@@ -300,7 +341,23 @@ namespace eydvzegvfbh
 
         private void button4_Click(object sender, EventArgs e)
         {
+            string recherche = textBox1.Text.Trim();
 
+            dataGridView1.ClearSelection();
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                string nom = Convert.ToString(row.Cells["name_product"].Value);
+
+                if (nom.IndexOf(recherche, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                {
+                    row.Selected = true;
+                    dataGridView1.CurrentCell = row.Cells["name_product"];
+                    break;
+                }
+            }
 
         }
 
@@ -326,6 +383,12 @@ namespace eydvzegvfbh
 
         private void button3_Click(object sender, EventArgs e)
         {
+
+            DialogResult result = MessageBox.Show("Voulez-vous vraiment supprimer ce produit ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+            {
+                return;
+            }
             try
             {
                 SqlConnection cnx = new SqlConnection(connectionString);
