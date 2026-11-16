@@ -371,7 +371,7 @@ namespace eydvzegvfbh
             cmd.Parameters.AddWithValue("@id_category", comboBox2.SelectedValue);
 
             cmd.Parameters.AddWithValue("@prix", decimal.TryParse(textBox2.Text, out decimal prixValue));
-                
+
             cmd.Parameters.AddWithValue("@quantity", numericUpDown1.Value);
             cmd.Parameters.AddWithValue("@id_product", comboBox1.SelectedValue);
             cmd.Parameters.AddWithValue("@descriptions", richTextBox1.Text);
@@ -399,11 +399,19 @@ namespace eydvzegvfbh
                 cnx.Close();
                 refresh();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Erreur : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
     }
 }               
 

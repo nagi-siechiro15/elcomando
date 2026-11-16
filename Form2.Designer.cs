@@ -100,6 +100,7 @@
             button5.TabIndex = 40;
             button5.Text = "first";
             button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // comboBox1
             // 
