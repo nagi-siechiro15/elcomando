@@ -77,7 +77,7 @@ namespace eydvzegvfbh
 
             MessageBox.Show("Produit ajouté !");
             refresh();
-
+            
 
         }
 
@@ -111,5 +111,91 @@ namespace eydvzegvfbh
                 MessageBox.Show("Produit supprimé !");
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedValue == null)
+                return;
+            int id = Convert.ToInt32(comboBox1.SelectedValue);
+
+            DataRow[] lignes = ds.Tables["products"].Select("id_product = " + id);
+            textBox1.Text = lignes[0]["name_product"].ToString();
+            textBox2.Text = lignes[0]["prix"].ToString();
+            numericUpDown1.Value = Convert.ToDecimal(lignes[0]["quantity"]);
+            richTextBox1.Text = lignes[0]["descriptions"].ToString();
+            comboBox2.SelectedValue = lignes[0]["id_category"];
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem is not DataRowView selectedProduct)
+                return;
+
+            DataRow product = selectedProduct.Row;
+            int productId = Convert.ToInt32(product["id_product"]);
+
+            textBox1.Text = product["name_product"].ToString();
+            textBox2.Text = product["prix"].ToString();
+            numericUpDown1.Value = Convert.ToDecimal(product["quantity"]);
+            richTextBox1.Text = product["descriptions"].ToString();
+            comboBox2.SelectedValue = product["id_category"];
+
+            dataGridView1.ClearSelection();
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.IsNewRow || row.Cells["id_product"].Value == null ||
+                    row.Cells["id_product"].Value == DBNull.Value ||
+                    Convert.ToInt32(row.Cells["id_product"].Value) != productId)
+                {
+                    continue;
+                }
+
+                dataGridView1.CurrentCell = row.Cells[0];
+                row.Selected = true;
+                break;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedValue == null || comboBox2.SelectedValue == null)
+                return;
+
+            if (!decimal.TryParse(textBox2.Text, out decimal prixValue))
+            {
+                MessageBox.Show("Veuillez saisir un prix valide.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int id = Convert.ToInt32(comboBox1.SelectedValue);
+            DataRow[] lignes = ds.Tables["products"].Select("id_product = " + id);
+            if (lignes.Length == 0)
+                return;
+
+            DataRow produit = lignes[0];
+            produit["name_product"] = textBox1.Text;
+            produit["id_category"] = comboBox2.SelectedValue;
+            produit["prix"] = prixValue;
+            produit["quantity"] = numericUpDown1.Value;
+            produit["descriptions"] = richTextBox1.Text;
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.IsNewRow || row.Cells["id_product"].Value == null ||
+                    row.Cells["id_product"].Value == DBNull.Value ||
+                    Convert.ToInt32(row.Cells["id_product"].Value) != id)
+                {
+                    continue;
+                }
+                row.Cells["name_product"].Value = textBox1.Text;
+                row.Cells["id_category"].Value = comboBox2.SelectedValue;
+                row.Cells["prix"].Value = prixValue;
+                row.Cells["quantity"].Value = numericUpDown1.Value;
+                row.Cells["descriptions"].Value = richTextBox1.Text;
+                break;
+            }
+
+            MessageBox.Show("Produit modifié en mémoire. Cliquez sur Enregistrer pour appliquer les changements à la base de données.");
+        }
+
     }
 }
