@@ -65,6 +65,7 @@
             clientToolStripMenuItem.Name = "clientToolStripMenuItem";
             clientToolStripMenuItem.Size = new Size(61, 24);
             clientToolStripMenuItem.Text = "Client";
+            clientToolStripMenuItem.Click += clientToolStripMenuItem_Click;
             // 
             // panel1
             // 

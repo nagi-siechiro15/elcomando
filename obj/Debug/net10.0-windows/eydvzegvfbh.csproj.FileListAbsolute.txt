@@ -63,3 +63,4 @@ C:\Users\ayoub\source\repos\eydvzegvfbh\eydvzegvfbh\obj\Debug\net10.0-windows\ey
 C:\Users\ayoub\source\repos\eydvzegvfbh\eydvzegvfbh\obj\Debug\net10.0-windows\eydvzegvfbh.Form5.resources
 C:\Users\ayoub\source\repos\eydvzegvfbh\eydvzegvfbh\obj\Debug\net10.0-windows\eydvzegvfbh.product_ctrl.resources
 C:\Users\ayoub\source\repos\eydvzegvfbh\eydvzegvfbh\obj\Debug\net10.0-windows\eydvzegvfbh.category_ctrl.resources
+C:\Users\ayoub\source\repos\eydvzegvfbh\eydvzegvfbh\obj\Debug\net10.0-windows\eydvzegvfbh.cllient_ctrl.resources

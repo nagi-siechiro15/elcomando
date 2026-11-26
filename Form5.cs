@@ -15,7 +15,8 @@ namespace eydvzegvfbh
             InitializeComponent();
         }
         product_ctrl product_Ctrl = new product_ctrl();
-        category_ctrl category_Ctrl = new category_ctrl();      
+        category_ctrl category_Ctrl = new category_ctrl();
+        cllient_ctrl client_Ctrl = new cllient_ctrl();
 
         private void Form5_Load(object sender, EventArgs e)
         {
@@ -52,7 +53,7 @@ namespace eydvzegvfbh
             panel1.Controls.Add(product_Ctrl);
 
         }
-        
+
 
         private void categorieToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -65,11 +66,26 @@ namespace eydvzegvfbh
                 }
             }
 
-            category_Ctrl= new category_ctrl();
+            category_Ctrl = new category_ctrl();
             category_Ctrl.Dock = DockStyle.Fill;
             panel1.Controls.Add(category_Ctrl);
         }
 
+        private void clientToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Control ctrl in panel1.Controls)
+            {
+                if (ctrl is UserControl)
+                {
+                    panel1.Controls.Remove(ctrl);
+                    ctrl.Dispose();
+                }
+            }
+            client_Ctrl = new cllient_ctrl();
+            client_Ctrl.Dock = DockStyle.Fill;
+            panel1.Controls.Add(client_Ctrl);
+
+        }
     }
-  }
+}
 
