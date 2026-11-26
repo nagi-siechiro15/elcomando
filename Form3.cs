@@ -42,7 +42,8 @@ namespace eydvzegvfbh
             adapterProduit.Fill(ds, "products");
             adapterCategory.Fill(ds, "category");
 
-            string req = "SELECT p.id_product, p.name_product, c.id_category, c.name_category, p.prix, p.quantity, p.descriptions FROM products p INNER JOIN category c ON p.id_category = c.id_category";
+            string req = "SELECT p.id_product, p.name_product, c.id_category, c.name_category, p.prix, p.quantity, p.descriptions " +
+                "FROM products p INNER JOIN category c ON p.id_category = c.id_category";
 
             adapterJoin = new SqlDataAdapter(req, cnx);
 
